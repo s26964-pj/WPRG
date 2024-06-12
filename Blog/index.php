@@ -35,16 +35,16 @@ $stmt = $post->readAll();
 </header>
 
 <div class="container">
-    <a href="actions/post/add_post.php">Dodaj nowy wpis</a>
+    <a href="actions/post/add_post.php" class="button">Dodaj nowy wpis</a>
     <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-        <div>
+        <div class="post">
             <h2><?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
             <p><?php echo htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8'); ?></p>
             <?php if ($row['image']): ?>
                 <img src="images/<?php echo htmlspecialchars($row['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="Obrazek">
             <?php endif; ?>
             <p>Opublikowano: <?php echo htmlspecialchars($row['published_at'], ENT_QUOTES, 'UTF-8'); ?></p>
-            <a href="post.php?id=<?php echo $row['id']; ?>">Przeczytaj więcej</a>
+            <a href="post.php?id=<?php echo $row['id']; ?>" class="button">Przeczytaj więcej</a>
         </div>
     <?php endwhile; ?>
 </div>

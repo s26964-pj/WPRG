@@ -54,10 +54,9 @@ if ($_POST) {
         <label for="password">Hasło:</label>
         <input type="password" name="password" required>
         <br>
-        <button type="submit">Zaloguj się</button>
+        <button type="submit" class="button">Zaloguj się</button>
     </form>
-    <a href="register.php">Rejestracja</a>
-    <a href="../../index.php">Powrót do bloga</a>
+    <a href="../../index.php" class="button">Powrót do bloga</a>
 </div>
 
 <footer>

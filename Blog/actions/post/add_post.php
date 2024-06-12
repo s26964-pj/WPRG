@@ -14,9 +14,9 @@ if ($_POST) {
 
     if ($post->create()) {
         if ($_FILES["image"]["tmp_name"]) {
-            move_uploaded_file($_FILES["image"]["tmp_name"], "../images/" . $post->image);
+            move_uploaded_file($_FILES["image"]["tmp_name"], "../../images/" . $post->image);
         }
-        echo "Wpis został dodany.";
+        header("Location: ../../index.php");
     } else {
         echo "Nie udało się dodać wpisu.";
     }
