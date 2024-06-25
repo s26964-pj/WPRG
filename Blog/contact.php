@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +15,10 @@
     <nav>
         <a href="index.php">Home</a>
         <a href="contact.php">Kontakt</a>
-        <?php if (isset($_SESSION['username'])): ?>
+        <?php if (isset($_SESSION['username']) && $_SESSION['role'] == 'admin'): ?>
             <a href="admin/dashboard.php">Panel Admina</a>
+            <a href="actions/user/logout.php">Wyloguj się</a>
+        <?php elseif (isset($_SESSION['username'])): ?>
             <a href="actions/user/logout.php">Wyloguj się</a>
         <?php else: ?>
             <a href="actions/user/login.php">Zaloguj się</a>
@@ -27,7 +33,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2023 Blog</p>
+    <p>&copy; 2024 Blog</p>
 </footer>
 </body>
 </html>

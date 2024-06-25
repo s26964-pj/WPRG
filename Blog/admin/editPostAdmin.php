@@ -1,6 +1,6 @@
 <?php
-include_once '../../classes/Database.php';
-include_once '../../classes/Post.php';
+include_once '../classes/Database.php';
+include_once '../classes/Post.php';
 
 session_start();
 
@@ -22,7 +22,7 @@ if ($_POST) {
     $post->published_at = $_POST['published_at'];
 
     if ($post->update()) {
-        header("Location: ../../post.php?id=" . $_POST['id']);
+        header("Location: dashboard.php");
         exit();
     } else {
         echo "Nie udało się zaktualizować wpisu.";

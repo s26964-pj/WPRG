@@ -9,7 +9,7 @@ $user = new User($db);
 
 if ($_POST) {
     $user->username = $_POST['username'];
-    $new_password = password_hash($_POST['new_password'], PASSWORD_BCRYPT);
+    $new_password = $_POST['new_password'];
 
     $query = "UPDATE " . $user->table_name . " SET password = :password WHERE username = :username";
     $stmt = $user->conn->prepare($query);
@@ -19,6 +19,7 @@ if ($_POST) {
 
     if ($stmt->execute()) {
         echo "Hasło zostało zresetowane.";
+        header("Location: ../../index.php");
     } else {
         echo "Nie udało się zresetować hasła.";
     }
@@ -50,13 +51,13 @@ if ($_POST) {
         <label for="new_password">Nowe hasło:</label>
         <input type="password" name="new_password" required>
         <br>
-        <button type="submit">Zresetuj hasło</button>
+        <button type="submit" class="button" style="width: 150px; font-size: 16px;">Zresetuj hasło</button>
     </form>
-    <a href="../../index.php">Powrót do bloga</a>
+    <a href="../../index.php" class="button">Powrót do bloga</a>
 </div>
 
 <footer>
-    <p>&copy; 2023 Blog</p>
+    <p>&copy; 2024 Blog</p>
 </footer>
 </body>
 </html>

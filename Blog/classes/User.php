@@ -15,7 +15,6 @@ class User {
     public function register() {
         $query = "INSERT INTO " . $this->table_name . " SET username=:username, password=:password, role=:role";
         $stmt = $this->conn->prepare($query);
-
         $stmt->bindParam(":username", $this->username);
         $stmt->bindParam(":password", $this->password);
         $stmt->bindParam(":role", $this->role);
@@ -35,13 +34,22 @@ class User {
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($row && password_verify($this->password, $row['password'])) {
+        if ($row && $this->password === $row['password']) {
             $this->id = $row['id'];
             $this->username = $row['username'];
             $this->role = $row['role'];
             return true;
         }
         return false;
+    }
+
+    public function userExists() {
+        $query = "SELECT id FROM " . $this->table_name . " WHERE username = :username";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":username", $this->username);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0;
     }
 
     public function logAction($action) {

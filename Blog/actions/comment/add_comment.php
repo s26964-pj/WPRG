@@ -15,10 +15,10 @@ if ($_POST) {
     $comment->user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
     if ($comment->create()) {
-        echo "Komentarz został dodany.";
+        header("Location: ../../post.php?id=" . $_POST['post_id']);
+        exit();
     } else {
         echo "Nie udało się dodać komentarza.";
     }
 }
 ?>
-<a href="../../post.php?id=<?php echo $_POST['post_id']; ?>" , class="button">Powrót do wpisu</a>

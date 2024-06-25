@@ -21,6 +21,7 @@ if ($_POST) {
         $user->logAction('login');
 
         header("Location: ../../index.php");
+        setcookie("last_visited_posts", "", time() - 3600, "/");
         exit();
     } else {
         echo "Nieprawidłowy login lub hasło.";
@@ -54,13 +55,15 @@ if ($_POST) {
         <label for="password">Hasło:</label>
         <input type="password" name="password" required>
         <br>
-        <button type="submit" class="button">Zaloguj się</button>
+        <a href="reset_password.php" class="button" style="width: 115px; font-size: 16px;">Reset hasła</a>
+        <br>
+        <button type="submit" class="button" style="width: 150px; font-size: 16px;">Zaloguj się</button>
     </form>
     <a href="../../index.php" class="button">Powrót do bloga</a>
 </div>
 
 <footer>
-    <p>&copy; 2023 Blog</p>
+    <p>&copy; 2024 Blog</p>
 </footer>
 </body>
 </html>

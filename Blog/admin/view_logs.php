@@ -23,10 +23,12 @@ $stmt->execute();
 <html>
 <head>
     <title>Logi</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <script src="../assets/js/script.js" defer></script>
 </head>
 <body>
 <h1>Logi</h1>
-<a href="dashboard.php">Powrót do panelu</a>
+<a href="dashboard.php" class="button">Powrót do panelu</a>
 <table>
     <thead>
     <tr>
@@ -49,4 +51,3 @@ $stmt->execute();
 </table>
 </body>
 </html>
-?>

@@ -9,13 +9,17 @@ $user = new User($db);
 
 if ($_POST) {
     $user->username = $_POST['username'];
-    $user->password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $user->role = 'user';
+    $user->password = $_POST['password'];
+    $user->role = $_POST['role'];
 
-    if ($user->register()) {
-        echo "Rejestracja zakończona sukcesem.";
+    if ($user->userExists()) {
+        $message = "Użytkownik o podanej nazwie już istnieje. Proszę wybrać inną nazwę.";
     } else {
-        echo "Nie udało się zarejestrować użytkownika.";
+        if ($user->register()) {
+            header("Location: login.php");
+        } else {
+            $message = "Nie udało się zarejestrować użytkownika.";
+        }
     }
 }
 ?>
@@ -46,13 +50,20 @@ if ($_POST) {
         <label for="password">Hasło:</label>
         <input type="password" name="password" required>
         <br><br>
-        <button type="submit" class="button">Zarejestruj się</button>
+        <label for="role">Rola:</label>
+        <select name="role" required>
+            <option value="admin">Admin</option>
+            <option value="author">Author</option>
+            <option value="user" selected>User</option>
+        </select>
+        <br><br>
+        <button type="submit" class="button"  style="width: 150px; font-size: 16px;">Zarejestruj się</button>
     </form>
     <a href="../../index.php" class="button">Powrót do bloga</a>
 </div>
 
 <footer>
-    <p>&copy; 2023 Blog</p>
+    <p>&copy; 2024 Blog</p>
 </footer>
 </body>
 </html>
