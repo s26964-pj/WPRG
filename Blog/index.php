@@ -10,7 +10,8 @@ $db = $database->getConnection();
 $post = new Post($db);
 $stmt = $post->readAll();
 
-function getPostTitle($post_id) {
+function getPostTitle($post_id)
+{
     $database = new Database();
     $db = $database->getConnection();
 
@@ -23,7 +24,8 @@ function getPostTitle($post_id) {
     return $post->title;
 }
 
-function getLastVisitedPosts() {
+function getLastVisitedPosts()
+{
     $cookie_name = 'last_visited_posts';
     $last_visited_posts = isset($_COOKIE[$cookie_name]) ? json_decode($_COOKIE[$cookie_name], true) : [];
 
@@ -36,6 +38,7 @@ function getLastVisitedPosts() {
 
     return $output;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +81,8 @@ function getLastVisitedPosts() {
                 <img src="images/<?php echo htmlspecialchars($row['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="Obrazek">
             <?php endif; ?>
             <p>Opublikowano: <?php echo htmlspecialchars($row['published_at'], ENT_QUOTES, 'UTF-8'); ?></p>
-            <a href="post.php?id=<?php echo htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8'); ?>" class="button">Przeczytaj więcej</a>
+            <a href="post.php?id=<?php echo htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8'); ?>" class="button">Przeczytaj
+                więcej</a>
         </div>
     <?php endwhile; ?>
 </div>
