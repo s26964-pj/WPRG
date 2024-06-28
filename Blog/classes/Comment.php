@@ -20,18 +20,25 @@ class Comment {
         $currentDateTime = date('Y-m-d H:i:s');
 
         $this->post_id = htmlspecialchars(strip_tags($this->post_id));
-        $this->user_id = htmlspecialchars(strip_tags($this->user_id));
         $this->content = htmlspecialchars(strip_tags($this->content));
 
+        if (!is_null($this->user_id)) {
+            $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+        }
+
         $stmt->bindParam(":post_id", $this->post_id);
-        $stmt->bindParam(":user_id", $this->user_id);
+        if (!is_null($this->user_id)) {
+            $stmt->bindParam(":user_id", $this->user_id, PDO::PARAM_INT);
+        } else {
+            $stmt->bindValue(":user_id", null, PDO::PARAM_NULL);
+        }
         $stmt->bindParam(":content", $this->content);
         $stmt->bindParam(":created_at", $currentDateTime);
 
         if ($stmt->execute()) {
             return true;
         } else {
-            printf("Error: %s.\n", $stmt->error);
+            printf("Error: %s.\n", $stmt->errorInfo()[2]);
             return false;
         }
     }
